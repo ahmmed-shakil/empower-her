@@ -101,7 +101,7 @@ const Testimonial = (props) => {
           <small>Testimonials</small>
           <h2>
             What Our Students
-            <span className=" mx-1">
+            <span className=" mx-2">
               Says
               <i className="shape">
                 <svg

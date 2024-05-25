@@ -31,7 +31,7 @@ const HomePage = () => {
           <small>Gallery</small>
           <h2>
             Building a
-            <span className=" mx-1">
+            <span className=" mx-2">
               Better
               <i className="shape">
                 <svg

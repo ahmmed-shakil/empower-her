@@ -54,7 +54,7 @@ const PortfolioSection = (props) => {
             <div className="col-lg-12">
               <div className="portfolio-grids gallery-container clearfix">
                 <ResponsiveMasonry
-                  columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                  columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 4 }}
                 >
                   <Masonry columnsCount={3} gutter="15px">
                     {Portfolios.map((image, i) => (

@@ -76,7 +76,7 @@ const CategorySection = (props) => {
               <small>EmpowerHer</small>
               <h2>
                 Learn
-                <span className=" mx-1">
+                <span className=" mx-2">
                   With
                   <i className="shape">
                     <svg

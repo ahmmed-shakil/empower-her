@@ -9,10 +9,10 @@ import shape2 from "../../images/slider/shape-2.svg";
 import shape3 from "../../images/slider/shape-3.svg";
 import shape4 from "../../images/slider/shape-4.svg";
 
-import cImg1 from "../../images/slider/client1.png";
-import cImg2 from "../../images/slider/client2.png";
-import cImg3 from "../../images/slider/client3.png";
-import cImg4 from "../../images/slider/client4.png";
+import cImg1 from "../../images/team/team_1_50x50.png";
+import cImg2 from "../../images/team/team_2_50x50.png";
+import cImg3 from "../../images/team/team_3_50x50.png";
+import cImg4 from "../../images/team/team_4_50x50.png";
 import VideoModal from "../ModalVideo/VideoModal";
 
 const settings = {
@@ -42,7 +42,7 @@ const Hero = () => {
               <div data-swiper-parallax="300" className="slide-title">
                 <h2>
                   Lets Learn About New
-                  <span className=" ms-1">
+                  <span className=" ms-2">
                     Knowledge
                     <i className="shape">
                       <svg

@@ -101,7 +101,7 @@ const Header = (props) => {
                         </li>
                       </ul>
                     </li> */}
-                    <li className="menu-item-has-children">
+                    {/* <li className="menu-item-has-children">
                       <Link onClick={ClickHandler} to="/">
                         Pages
                       </Link>
@@ -150,8 +150,14 @@ const Header = (props) => {
                           </Link>
                         </li>
                       </ul>
+                    </li> */}
+                    <li>
+                      <Link onClick={ClickHandler} to="/blog">
+                        Blogs
+                      </Link>
                     </li>
-                    <li className="menu-item-has-children">
+
+                    {/* <li className="menu-item-has-children">
                       <Link onClick={ClickHandler} to="/">
                         Blog
                       </Link>
@@ -203,8 +209,8 @@ const Header = (props) => {
                           </ul>
                         </li>
                       </ul>
-                    </li>
-                    <li className="menu-item-has-children">
+                    </li> */}
+                    {/* <li className="menu-item-has-children">
                       <Link onClick={ClickHandler} to="/">
                         Shop
                       </Link>
@@ -233,10 +239,42 @@ const Header = (props) => {
                           </Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
                     <li>
                       <Link onClick={ClickHandler} to="/contact">
                         Contact
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        onClick={ClickHandler}
+                        to="/cart"
+                        style={{ position: "relative" }}
+                      >
+                        <svg
+                          fill="#000000"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 902.86 902.86"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g>
+                            <g>
+                              <path d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z M685.766,247.188l-67.077,262.64H131.199L81.928,246.756L685.766,247.188z"></path>
+                              <path d="M578.418,825.641c59.961,0,108.743-48.783,108.743-108.744s-48.782-108.742-108.743-108.742H168.717 c-59.961,0-108.744,48.781-108.744,108.742s48.782,108.744,108.744,108.744c59.962,0,108.743-48.783,108.743-108.744 c0-14.4-2.821-28.152-7.927-40.742h208.069c-5.107,12.59-7.928,26.342-7.928,40.742 C469.675,776.858,518.457,825.641,578.418,825.641z M209.46,716.897c0,22.467-18.277,40.744-40.743,40.744 c-22.466,0-40.744-18.277-40.744-40.744c0-22.465,18.277-40.742,40.744-40.742C191.183,676.155,209.46,694.432,209.46,716.897z M619.162,716.897c0,22.467-18.277,40.744-40.743,40.744s-40.743-18.277-40.743-40.744c0-22.465,18.277-40.742,40.743-40.742 S619.162,694.432,619.162,716.897z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                        <p
+                          className=" d-inline"
+                          style={{
+                            position: "absolute",
+                            top: 20,
+                            fontSize: "1rem",
+                          }}
+                        >
+                          5
+                        </p>
                       </Link>
                     </li>
                   </ul>
@@ -244,7 +282,7 @@ const Header = (props) => {
               </div>
               <div className="col-lg-3 col-md-3 col-2">
                 <div className="header-right">
-                  <div className="header-search-form-wrapper">
+                  {/* <div className="header-search-form-wrapper">
                     <div className="cart-search-contact">
                       <button
                         onClick={() => setMenuState(!menuActive)}
@@ -275,7 +313,7 @@ const Header = (props) => {
                         </form>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="close-form">
                     <Link onClick={ClickHandler} className="login" to="/login">
                       <span className="text">Sign In</span>

@@ -45,7 +45,7 @@ const About = (props) => {
                   <small>About EmpowerHer</small>
                   <h2>
                     A New Different Way To Improve Your
-                    <span className=" ms-1">
+                    <span className=" ms-2">
                       Skills.
                       <i className="shape">
                         <svg

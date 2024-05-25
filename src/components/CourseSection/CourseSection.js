@@ -14,7 +14,7 @@ const CourseSection = (props) => {
           <small>Popular Courses</small>
           <h2>
             Discover Your Favorite
-            <span className=" ms-1">
+            <span className=" ms-2">
               Courses
               <i className="shape">
                 <svg
