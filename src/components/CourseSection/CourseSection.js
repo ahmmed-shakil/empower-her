@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Courses from "../../api/Courses";
+import axios from "axios";
+import { base_url } from "../../utils/baseUrl";
+import { toast } from "react-toastify";
 
 const ClickHandler = () => {
   window.scrollTo(10, 0);
 };
 
 const CourseSection = (props) => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(`${base_url}/api/v1/blog`);
+        if (response?.data?.succes) {
+          setCourses(response?.data?.data);
+        }
+      } catch (error) {
+        toast.error("Failed to fetch blogs");
+      }
+    };
+    fetchCourses();
+  }, []);
+  console.log("🚀 ~ CourseSection ~ courses:", courses);
   return (
     <div className={`wpo-popular-area section-padding ${props.pClass}`}>
       <div className="container">

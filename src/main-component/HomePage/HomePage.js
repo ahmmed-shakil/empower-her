@@ -22,8 +22,8 @@ const HomePage = () => {
       <CategorySection />
       <CourseSection />
       <Testimonial />
-      <TeamSection pbClass={"pb-big"} />
-      <ChooseSection />
+      {/* <TeamSection pbClass={"pb-big"} /> */}
+      {/* <ChooseSection /> */}
       <BlogSection />
       <Newslatter />
       <div style={{ paddingBottom: "40px" }}>
