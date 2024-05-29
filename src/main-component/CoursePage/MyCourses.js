@@ -9,7 +9,7 @@ import { useUser } from "../../context/userContext";
 import axios from "axios";
 import { base_url } from "../../utils/baseUrl";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ClickHandler = () => {
   window.scrollTo(10, 0);
@@ -17,7 +17,12 @@ const ClickHandler = () => {
 const MyCourses = (props) => {
   const [courses, setCourses] = useState([]);
 
+  const push = useNavigate();
+
   const { userId } = useUser();
+  useEffect(() => {
+    !userId && push("/login");
+  }, [userId, push]);
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -25,7 +30,7 @@ const MyCourses = (props) => {
         setCourses(response?.data);
         console.log("🚀 ~ fetchCourses ~ response:", response);
       } catch (error) {
-        toast.error("Failed to fetch courses");
+        // toast.error("Failed to fetch courses");
       }
     };
     fetchCourses();

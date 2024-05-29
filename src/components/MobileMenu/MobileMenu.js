@@ -206,6 +206,11 @@ const menus = [
     title: "Contact",
     link: "/contact",
   },
+  {
+    id: 834,
+    title: "My Courses",
+    link: "/my-courses",
+  },
 ];
 
 const MobileMenu = () => {
