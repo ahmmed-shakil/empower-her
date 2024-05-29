@@ -44,7 +44,7 @@ const CourseSinglePage = (props) => {
                 <div className="wpo-course-details-img">
                   <img src={courseDetails?.thumb} alt={courseDetails?.title} />
                 </div>
-                <CoureseTab CoursesDetails={courseDetails} modules={modules} />
+                <CoureseTab EventsDetails={courseDetails} modules={modules} />
               </div>
             </div>
             <Sidebar course={courseDetails} />

@@ -1,6 +1,7 @@
 import React from "react";
 
 const Overview = ({ course }) => {
+  console.log("🚀 ~ Overview ~ course:", course);
   return (
     <div className="wpo-course-content">
       <div className="wpo-course-text-top">

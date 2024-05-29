@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { base_url } from "../../utils/baseUrl";
+import ReactPlayer from "react-player";
 
 const LessonPage = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const LessonPage = () => {
   };
 
   const [selected, setSelected] = useState({});
+
   const [lessons, setLessons] = useState([]);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const LessonPage = () => {
     };
     fetchLessons();
   }, [id]);
-
+  console.log("🚀 ~ LessonPage ~ selected:", selected);
   return (
     <Fragment>
       <section className="wpo-lesson-section">
@@ -108,9 +110,26 @@ const LessonPage = () => {
                     Back To Home
                   </Link>
                 </div>
-                <video autoPlay muted poster={video} loop>
+                {/* <video autoPlay muted poster={video} loop>
                   <source src={video} type="video/mp4" />
-                </video>
+                </video> */}
+                <div className="video-wrapper">
+                  {/* <iframe
+                    width="560"
+                    height="315"
+                    src={selected?.url}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="Embedded YouTube Video"
+                  ></iframe> */}
+                  <ReactPlayer
+                    url={selected?.url}
+                    controls={true}
+                    width="100%"
+                    height="60vh"
+                  />
+                </div>
               </div>
             </div>
           </div>
