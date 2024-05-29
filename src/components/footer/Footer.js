@@ -157,7 +157,7 @@ const Footer = (props) => {
                 <li>
                   &copy; 2024{" "}
                   <Link onClick={ClickHandler} to="/">
-                    EmpowerHEr
+                    EmpowerHer
                   </Link>
                   . All rights reserved.
                 </li>
