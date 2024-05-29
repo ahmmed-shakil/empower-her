@@ -21,7 +21,7 @@ const Sidebar = ({ course }) => {
         );
         setEnrolled(result?.data);
       } catch (error) {
-        toast.error("Failed to fetch enroll status");
+        // toast.error("Failed to fetch enroll status");
       }
     };
     fetchStatus();
