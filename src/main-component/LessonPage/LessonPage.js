@@ -101,8 +101,8 @@ const LessonPage = () => {
                     Back To Home
                   </Link>
                 </div>
-                <video autoPlay muted poster={selected?.url} loop>
-                  <source src={selected?.url} type="video/mp4" />
+                <video autoPlay muted poster={video} loop>
+                  <source src={video} type="video/mp4" />
                 </video>
               </div>
             </div>
