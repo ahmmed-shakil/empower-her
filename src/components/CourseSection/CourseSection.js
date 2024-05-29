@@ -4,21 +4,21 @@ import Courses from "../../api/Courses";
 import axios from "axios";
 import { base_url } from "../../utils/baseUrl";
 import { toast } from "react-toastify";
+import { useUser } from "../../context/userContext";
 
 const ClickHandler = () => {
   window.scrollTo(10, 0);
 };
 
 const CourseSection = (props) => {
+  const { userId } = useUser();
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get(`${base_url}/api/v1/blog`);
-        if (response?.data?.succes) {
-          setCourses(response?.data?.data);
-        }
+        const response = await axios.get(`${base_url}/course`);
+        setCourses(response?.data);
       } catch (error) {
         toast.error("Failed to fetch blogs");
       }
@@ -49,48 +49,55 @@ const CourseSection = (props) => {
         </div>
         <div className="wpo-popular-wrap">
           <div className="row">
-            {Courses.slice(0, 3).map((course, aitem) => (
+            {courses.slice(0, 3).map((course, aitem) => (
               <div className="col col-lg-4 col-md-6 col-12" key={aitem}>
                 <div className="wpo-popular-single">
                   <div className="wpo-popular-item">
                     <div className="wpo-popular-img">
-                      <img src={course.cImg} alt="" />
+                      <img
+                        src={course?.thumb}
+                        width={289}
+                        height={210}
+                        alt={course?.title}
+                      />
                       <div className="thumb">
-                        <span>{course.fee}</span>
+                        <span>free</span>
                       </div>
                     </div>
                     <div className="wpo-popular-content">
                       <div className="wpo-popular-text-top">
                         <ul>
+                          {/* <li>
+                            <img width={289} height={210} src={course.author} alt="" />
+                          </li> */}
                           <li>
-                            <img src={course.author} alt="" />
-                          </li>
-                          <li>
-                            <Link
+                            {/* <Link
                               onClick={ClickHandler}
-                              to={`/course-single/${course.slug}`}
-                            >
-                              {course.authortitle}
-                            </Link>
+                              to={`/course-single/${course?._id}`}
+                            > */}
+                            {course?.author}
+                            {/* </Link> */}
                           </li>
                         </ul>
-                        <ul>
+                        {/* <ul>
                           <li>
                             <i className="fi flaticon-star"></i>
                           </li>
                           <li>({course.ratting})</li>
-                        </ul>
+                        </ul> */}
                       </div>
                       <h2 style={{ minHeight: "80px" }}>
                         <Link
                           onClick={ClickHandler}
-                          to={`/course-single/${course.slug}`}
+                          to={
+                            userId ? `/course-single/${course._id}` : "/login"
+                          }
                         >
                           {course.title}
                         </Link>
                       </h2>
 
-                      <div className="wpo-popular-text-bottom">
+                      {/* <div className="wpo-popular-text-bottom">
                         <ul>
                           <li>
                             <i className="fi flaticon-reading-book"></i>{" "}
@@ -101,7 +108,7 @@ const CourseSection = (props) => {
                             {course.lesson} Lesson
                           </li>
                         </ul>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

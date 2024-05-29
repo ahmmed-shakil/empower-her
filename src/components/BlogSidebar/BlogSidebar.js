@@ -1,36 +1,67 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import about from '../../images/blog/about-widget.jpg'
-import blogs from '../../api/blogs'
+import React from "react";
+import { Link } from "react-router-dom";
+import about from "../../images/blog/about-widget.jpg";
+import blogs from "../../api/blogs";
 
 const SubmitHandler = (e) => {
-    e.preventDefault()
-}
+  e.preventDefault();
+};
 
 const ClickHandler = () => {
-    window.scrollTo(10, 0);
-}
+  window.scrollTo(10, 0);
+};
 
 const BlogSidebar = (props) => {
-    return (
-        <div className={`col col-lg-4 col-12 ${props.blLeft}`}>
-            <div className="blog-sidebar">
-                <div className="widget about-widget">
-                    <div className="img-holder">
-                        <img src={about} alt="" />
-                    </div>
-                    <h4>Jenny Watson</h4>
-                    <p>Hi! beautiful people. I`m an authtor of this blog. Read our post - stay with us</p>
-                    <div className="social">
-                        <ul className="clearfix">
-                            <li><Link onClick={ClickHandler} to="/blog-single/Letraset-Sheets-Passage-And-Recently"><i className="ti-facebook"></i></Link></li>
-                            <li><Link onClick={ClickHandler} to="/blog-single/Letraset-Sheets-Passage-And-Recently"><i className="ti-twitter-alt"></i></Link></li>
-                            <li><Link onClick={ClickHandler} to="/blog-single/Letraset-Sheets-Passage-And-Recently"><i className="ti-linkedin"></i></Link></li>
-                            <li><Link onClick={ClickHandler} to="/blog-single/Letraset-Sheets-Passage-And-Recently"><i className="ti-pinterest"></i></Link></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="widget search-widget">
+  return (
+    <div className={`col col-lg-4 col-12 ${props.blLeft}`}>
+      <div className="blog-sidebar">
+        <div className="widget about-widget">
+          <div className="img-holder">
+            <img src={about} alt="" />
+          </div>
+          <h4>Jenny Watson</h4>
+          <p>
+            Hi! beautiful people. I`m an authtor of this blog. Read our post -
+            stay with us
+          </p>
+          <div className="social">
+            <ul className="clearfix">
+              <li>
+                <Link
+                  onClick={ClickHandler}
+                  to="/blog-single/Letraset-Sheets-Passage-And-Recently"
+                >
+                  <i className="ti-facebook"></i>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={ClickHandler}
+                  to="/blog-single/Letraset-Sheets-Passage-And-Recently"
+                >
+                  <i className="ti-twitter-alt"></i>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={ClickHandler}
+                  to="/blog-single/Letraset-Sheets-Passage-And-Recently"
+                >
+                  <i className="ti-linkedin"></i>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={ClickHandler}
+                  to="/blog-single/Letraset-Sheets-Passage-And-Recently"
+                >
+                  <i className="ti-pinterest"></i>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* <div className="widget search-widget">
                     <h3>Search Here</h3>
                     <form onSubmit={SubmitHandler}>
                         <div>
@@ -83,11 +114,10 @@ const BlogSidebar = (props) => {
                     <div className="wpo-contact-widget-inner">
                         <h2><Link onClick={ClickHandler} to="/contact">Contact For Advertisment 270 x 310</Link></h2>
                     </div>
-                </div>
-            </div>
-        </div>
-    )
-
-}
+                </div> */}
+      </div>
+    </div>
+  );
+};
 
 export default BlogSidebar;

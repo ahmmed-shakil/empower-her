@@ -2,9 +2,10 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ts1 from "../../images/testimonial/thumb1.png";
-import ts2 from "../../images/testimonial/thumb2.png";
-import ts3 from "../../images/testimonial/thumb3.png";
+import ts1 from "../../images/testimonial/user1.jpg";
+import ts2 from "../../images/testimonial/user2.jpg";
+import ts3 from "../../images/testimonial/user3.jpg";
+import ts4 from "../../images/testimonial/user4.jpg";
 
 import shape1 from "../../images/testimonial/shape-1.png";
 import shape2 from "../../images/testimonial/shape-2.png";
@@ -14,29 +15,25 @@ const testimonial = [
     id: "01",
     tImg: ts1,
     Des: "I can't express enough gratitude for the awesome experience I had during my education journey. As a beginner they support me as much possible.",
-    Title: "Robert Willum",
-    Sub: "President of BPT",
+    Title: "Aaradhya",
   },
   {
     id: "02",
     tImg: ts2,
-    Des: "I can't express enough gratitude for the awesome experience I had during my education journey. As a beginner they support me as much possible.",
-    Title: "Leslie Alexander",
-    Sub: "President of TBP",
+    Des: "There is a diverse selection of courses available, covering various skills like coding, design, marketing, and more.",
+    Title: "Aanya",
   },
   {
     id: "03",
     tImg: ts3,
-    Des: "I can't express enough gratitude for the awesome experience I had during my education journey. As a beginner they support me as much possible.",
-    Title: "David Joy",
-    Sub: "President of AML",
+    Des: "The website is well-designed and user-friendly, allowing users to navigate and find courses easily.",
+    Title: "Kavya",
   },
   {
     id: "04",
-    tImg: ts2,
-    Des: "I can't express enough gratitude for the awesome experience I had during my education journey. As a beginner they support me as much possible.",
-    Title: "Leslie Alexander",
-    Sub: "President of TBP",
+    tImg: ts4,
+    Des: "ll courses are completely free, making it an excellent resource for anyone looking to develop new skills without financial barriers.",
+    Title: "Saanvi",
   },
 ];
 
@@ -125,7 +122,12 @@ const Testimonial = (props) => {
                     <div className="wpo-testimonial-text">
                       <div className="wpo-testimonial-text-btm">
                         <div className="wpo-testimonial-text-btm-img">
-                          <img src={tesmnl.tImg} alt="" />
+                          <img
+                            src={tesmnl.tImg}
+                            height={70}
+                            width={70}
+                            alt=""
+                          />
                         </div>
                         <div className="wpo-testimonial-text-btm-info">
                           <h3>{tesmnl.Title}</h3>

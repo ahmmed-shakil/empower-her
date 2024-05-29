@@ -25,7 +25,7 @@ const HomePage = () => {
       {/* <TeamSection pbClass={"pb-big"} /> */}
       {/* <ChooseSection /> */}
       <BlogSection />
-      <Newslatter />
+      {/* <Newslatter /> */}
       <div style={{ paddingBottom: "40px" }}>
         <div className="wpo-section-title-s2">
           <small>Gallery</small>

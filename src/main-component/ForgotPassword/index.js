@@ -7,13 +7,13 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
+import axios from "axios";
+import { base_url } from "../../utils/baseUrl";
 
 const ForgotPassword = (props) => {
   const push = useNavigate();
 
-  const [value, setValue] = useState({
-    email: "",
-  });
+  const [value, setValue] = useState({});
 
   const changeHandler = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
@@ -26,18 +26,22 @@ const ForgotPassword = (props) => {
     })
   );
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    if (validator.allValid()) {
-      setValue({
-        email: "",
-      });
-      validator.hideMessages();
-      toast.success("You successfully Login!");
-      push("/login");
-    } else {
-      validator.showMessages();
-      toast.error("Empty field is not allowed!");
+    try {
+      const data = {
+        password: value?.newPass,
+      };
+      const result = await axios.patch(
+        `${base_url}/student/reset/${value?.email}/${value?.contact}`,
+        data
+      );
+      if (result?.data?.success) {
+        toast.success("Password updated");
+        push("/");
+      }
+    } catch (error) {
+      toast.error("failed to update password");
     }
   };
   return (
@@ -65,13 +69,51 @@ const ForgotPassword = (props) => {
               {validator.message("email", value.email, "required|email")}
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Contact No"
+                value={value.contact}
+                variant="outlined"
+                name="contact"
+                label="Conatct No"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message("contact", value.contact, "required|numeric")}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="New Password"
+                value={value.newPass}
+                variant="outlined"
+                name="newPass"
+                label="New Password"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message(
+                "new password",
+                value.newPass,
+                "required|password"
+              )}
+            </Grid>
+            <Grid item xs={12}>
               <Grid className="formFooter">
                 <Button
                   fullWidth
                   className="cBtn cBtnLarge cBtnTheme"
                   type="submit"
                 >
-                  Resend Password
+                  Reset Password
                 </Button>
               </Grid>
               {/* <Grid className="loginWithSocial">

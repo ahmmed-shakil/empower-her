@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import SimpleReactValidator from "simple-react-validator";
 import { toast } from "react-toastify";
@@ -7,13 +7,21 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
+import axios from "axios";
+import { base_url } from "../../utils/baseUrl";
+import { useUser } from "../../context/userContext";
 
 const SignUpPage = (props) => {
   const push = useNavigate();
-
+  const { userId, login, logout } = useUser();
+  useEffect(() => {
+    userId && push("/");
+  }, [push, userId]);
   const [value, setValue] = useState({
     email: "",
-    full_name: "",
+    firstName: "",
+    lastName: "",
+    contact: "",
     password: "",
     confirm_password: "",
   });
@@ -29,23 +37,63 @@ const SignUpPage = (props) => {
     })
   );
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    if (validator.allValid()) {
-      setValue({
-        email: "",
-        full_name: "",
-        password: "",
-        confirm_password: "",
-      });
-      validator.hideMessages();
-      toast.success("Registration Complete successfully!");
-      push("/login");
-    } else {
-      validator.showMessages();
-      toast.error("Empty field is not allowed!");
+
+    // Check if passwords match
+    if (value.password !== value.confirm_password) {
+      toast.error("Passwords did not match");
+      return;
+    }
+
+    // Prepare data object
+    const data = {
+      firstName: value.firstName,
+      lastName: value.lastName,
+      email: value.email,
+      contact: value.contact,
+      password: value.password,
+    };
+
+    try {
+      // Send POST request to create admin
+      const response = await axios.post(
+        `${base_url}/student/create-student`,
+        data
+      );
+
+      console.log("🚀 ~ submitForm ~ response:", response);
+      // Check if response indicates success
+      if (response.data.success) {
+        console.log("Calling logins");
+        login(response.data?.data?._id, response?.data?.data?.fullName);
+        toast.success("Registration completed successfully!");
+      } else {
+        toast.error(response?.data?.message);
+      }
+
+      // Validate fields and reset form if valid
+      if (validator.allValid()) {
+        setValue({
+          email: "",
+          firstName: "",
+          lastName: "",
+          contact: "",
+          password: "",
+          confirm_password: "",
+        });
+        validator.hideMessages();
+      } else {
+        validator.showMessages();
+        toast.error("Empty field is not allowed!");
+      }
+    } catch (error) {
+      // Handle error
+      toast.error(error?.response?.data?.message);
+      console.error("Error creating admin:", error?.response?.data?.message);
     }
   };
+
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
@@ -57,11 +105,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Full Name"
-                value={value.full_name}
+                placeholder="First Name"
+                value={value.firstName}
                 variant="outlined"
-                name="full_name"
-                label="Name"
+                name="firstName"
+                label="First Name"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -69,10 +117,27 @@ const SignUpPage = (props) => {
                 onChange={(e) => changeHandler(e)}
               />
               {validator.message(
-                "full name",
-                value.full_name,
+                "first name",
+                value.firstName,
                 "required|alpha"
               )}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Last Name"
+                value={value.lastName}
+                variant="outlined"
+                name="lastName"
+                label="Last Name"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message("last name", value.lastName, "required|alpha")}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -90,6 +155,27 @@ const SignUpPage = (props) => {
                 onChange={(e) => changeHandler(e)}
               />
               {validator.message("email", value.email, "required|email")}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Contact No"
+                value={value.contact}
+                variant="outlined"
+                name="contact"
+                label="Conact No"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message(
+                "contact no",
+                value.contact,
+                "required|numeric"
+              )}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -113,7 +199,7 @@ const SignUpPage = (props) => {
                 className="inputOutline"
                 fullWidth
                 placeholder="Confirm Password"
-                value={value.password}
+                value={value.confirm_password}
                 variant="outlined"
                 name="confirm_password"
                 label="Confirm Password"
@@ -136,14 +222,9 @@ const SignUpPage = (props) => {
                   className="cBtn cBtnLarge cBtnTheme"
                   type="submit"
                 >
-                  Sign Up
+                  Create
                 </Button>
               </Grid>
-              {/* <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
-                            </Grid> */}
               <p className="noteHelp">
                 Already have an account?{" "}
                 <Link to="/login">Return to Sign In</Link>

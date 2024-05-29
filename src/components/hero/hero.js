@@ -93,7 +93,7 @@ const Hero = () => {
                     <p>Total Active Students</p>
                   </div>
                 </div>
-                <div className="wpo-supporter">
+                {/* <div className="wpo-supporter">
                   <div className="wpo-supporter-text">
                     <div className="content">
                       <h3>20+</h3>
@@ -121,7 +121,7 @@ const Hero = () => {
                       </Slider>
                     </ul>
                   </div>
-                </div>
+                </div> */}
                 <div className="wp-shape-1">
                   <img src={shape1} alt="" />
                 </div>

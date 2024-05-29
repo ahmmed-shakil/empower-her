@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import SimpleReactValidator from "simple-react-validator";
 import { toast } from "react-toastify";
@@ -9,14 +9,20 @@ import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./style.scss";
+import { useUser } from "../../context/userContext";
+import axios from "axios";
+import { base_url } from "../../utils/baseUrl";
 
 const LoginPage = (props) => {
   const push = useNavigate();
+  const { userId, login } = useUser();
+  useEffect(() => {
+    userId && push("/");
+  }, [userId, push]);
 
   const [value, setValue] = useState({
-    email: "user@gmail.com",
-    password: "123456",
-    remember: false,
+    email: "",
+    password: "",
   });
 
   const changeHandler = (e) => {
@@ -34,28 +40,52 @@ const LoginPage = (props) => {
     })
   );
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
+
+    const userRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const email = value.email;
+    console.log("🚀 ~ submitForm ~ email:", email, email.match(userRegex));
+
+    if (email.match(userRegex)) {
+      try {
+        if (!value.password) {
+          toast.error("Password is required");
+          return;
+        }
+        const response = await axios.post(`${base_url}/student/login`, {
+          email,
+          password: value.password,
+        });
+
+        console.log("Response", response);
+
+        if (response?.data?.data?._id) {
+          login(response?.data?.data?.id, response?.data?.data?.fullName);
+          toast.success("You successfully logged in on EmpowerHer!");
+          // push("/home");
+        } else {
+          toast.error("Failed to log in. Please check your credentials.");
+        }
+      } catch (error) {
+        // Handle error
+        toast.error(error?.response?.data?.message);
+        console.error("Error during login:", error);
+      }
+    } else {
+      toast.error("Email format is invalid.");
+    }
+
     if (validator.allValid()) {
       setValue({
         email: "",
         password: "",
-        remember: false,
       });
       validator.hideMessages();
-
-      const userRegex = /^user+.*/gm;
-      const email = value.email;
-
-      if (email.match(userRegex)) {
-        toast.success("You successfully Login on Eduko !");
-        push("/home");
-      }
-    } else {
-      validator.showMessages();
-      toast.error("Empty field is not allowed!");
     }
   };
+
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
@@ -100,7 +130,7 @@ const LoginPage = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Grid className="formAction">
-                <FormControlLabel
+                {/* <FormControlLabel
                   control={
                     <Checkbox
                       checked={value.remember}
@@ -108,7 +138,7 @@ const LoginPage = (props) => {
                     />
                   }
                   label="Remember Me"
-                />
+                /> */}
                 <Link to="/forgot-password">Forgot Password?</Link>
               </Grid>
               <Grid className="formFooter">
@@ -116,11 +146,6 @@ const LoginPage = (props) => {
                   Login
                 </Button>
               </Grid>
-              {/* <Grid className="loginWithSocial">
-                                <Button className="facebook"><i className="fa fa-facebook"></i></Button>
-                                <Button className="twitter"><i className="fa fa-twitter"></i></Button>
-                                <Button className="linkedin"><i className="fa fa-linkedin"></i></Button>
-                            </Grid> */}
               <p className="noteHelp">
                 Don't have an account?{" "}
                 <Link to="/register">Create free account</Link>

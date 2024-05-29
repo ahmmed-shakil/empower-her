@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Logo from "../../images/logo_main.png";
 import HeaderTopbar from "../HeaderTopbar/HeaderTopbar";
+import { useUser } from "../../context/userContext";
+import user from "../../images/user.png";
 
 const Header = (props) => {
   const [menuActive, setMenuState] = useState(false);
@@ -13,7 +15,7 @@ const Header = (props) => {
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
-
+  const { userName, userId } = useUser();
   return (
     <header id="header">
       <HeaderTopbar topbarClass={props.topbarClass} />
@@ -245,7 +247,7 @@ const Header = (props) => {
                         Contact
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link
                         onClick={ClickHandler}
                         to="/cart"
@@ -276,7 +278,7 @@ const Header = (props) => {
                           5
                         </p>
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
@@ -314,24 +316,40 @@ const Header = (props) => {
                       </div>
                     </div>
                   </div> */}
-                  <div className="close-form">
-                    <Link onClick={ClickHandler} className="login" to="/login">
-                      <span className="text">Sign In</span>
-                      <span className="mobile">
-                        <i className="fi flaticon-charity"></i>
-                      </span>
+                  {userId ? (
+                    <Link to={"/my-profile"}>
+                      <div
+                        className="d-flex align-items-center"
+                        style={{ cursor: "pointer" }}
+                      >
+                        <img alt={userName} height={20} width={20} src={user} />
+                        <p className=" p-0 m-0 d-none d-md-block">{userName}</p>
+                      </div>
                     </Link>
-                    <Link
-                      onClick={ClickHandler}
-                      className="theme-btn"
-                      to="/register"
-                    >
-                      <span className="text">Sign Up</span>
-                      <span className="mobile">
-                        <i className="fi flaticon-charity"></i>
-                      </span>
-                    </Link>
-                  </div>
+                  ) : (
+                    <div className="close-form">
+                      <Link
+                        onClick={ClickHandler}
+                        className="login"
+                        to="/login"
+                      >
+                        <span className="text">Sign In</span>
+                        <span className="mobile">
+                          <i className="fi flaticon-charity"></i>
+                        </span>
+                      </Link>
+                      <Link
+                        onClick={ClickHandler}
+                        className="theme-btn"
+                        to="/register"
+                      >
+                        <span className="text">Sign Up</span>
+                        <span className="mobile">
+                          <i className="fi flaticon-charity"></i>
+                        </span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
