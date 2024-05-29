@@ -68,7 +68,14 @@ const LessonPage = () => {
                         <div className="accordion-body">
                           <ul className="item">
                             {lessons?.map((lesson, i) => (
-                              <li key={lesson?._id}>
+                              <li
+                                key={lesson?._id}
+                                className={`${
+                                  selected?._id === lesson?._id &&
+                                  "text-primary"
+                                }`}
+                                style={{ cursor: "pointer" }}
+                              >
                                 <span onClick={() => ClickHandler(lesson)}>
                                   <span>
                                     {i + 1}.
